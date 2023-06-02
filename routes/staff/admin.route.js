@@ -13,13 +13,13 @@ const {registerAdminCtrl,
   adminWithdrawTeacherCtrl,
   adminUnwithdrawTeacherCtrl,
   adminPublishResultsCtrl,
-  adminUnPublishResultsCtrl} = require('../../controllers/staff/staff.controller');
+  adminUnPublishResultsCtrl} = require('../../controllers/staff/admin.controller');
 
 // register
 adminRouter.post('/register', registerAdminCtrl);
 
 //login
-adminRouter.post('/', loginAdminCtrl);
+adminRouter.post('/login', loginAdminCtrl);
 
 //get all admins
 adminRouter.get('/', getAdminsCtrl);
