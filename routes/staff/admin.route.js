@@ -2,185 +2,63 @@ const express = require('express');
 
 const adminRouter = express.Router();
 
+const {registerAdminCtrl,
+  loginAdminCtrl,
+  getAdminsCtrl,
+  getSingleAdminCtrl,
+  updateAdminCtrl,
+  deleteAdminCtrl,
+  adminSuspendTeacherCtrl,
+  adminUnsuspendTeacherCtrl,
+  adminWithdrawTeacherCtrl,
+  adminUnwithdrawTeacherCtrl,
+  adminPublishResultsCtrl,
+  adminUnPublishResultsCtrl} = require('../../controllers/staff/staff.controller');
+
 // register
-adminRouter.post('/register', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'Admin has been registered'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.post('/register', registerAdminCtrl);
 
 //login
-adminRouter.post('/', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'Admin has been logged in'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.post('/', loginAdminCtrl);
 
 //get all admins
-adminRouter.get('/', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'All admins'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.get('/', getAdminsCtrl);
 
 // get single admin
-adminRouter.get('/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'single admin'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.get('/:id',
+getSingleAdminCtrl );
 
 // update admin
-adminRouter.put('/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'update admin'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/:id',
+updateAdminCtrl );
 
 // delete admin
-adminRouter.delete('/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'delete admin'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.delete('/:id',
+deleteAdminCtrl );
 
 // admin suspending teacher
-adminRouter.put('/suspend/teacher/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin suspend teacher'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/suspend/teacher/:id',
+adminSuspendTeacherCtrl );
 
 // admin Unsuspending teacher
-adminRouter.put('/unsuspend/teacher/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin Unsuspend teacher'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/unsuspend/teacher/:id',
+adminUnsuspendTeacherCtrl );
 
 // admin withdrawing a teacher
-adminRouter.put('/withdraw/teacher/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin withdraw teacher'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/withdraw/teacher/:id',
+adminWithdrawTeacherCtrl );
 
 // admin Unwithdrawing a teacher
-adminRouter.put('/unwithdraw/teacher/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin unwithdraw teacher'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/unwithdraw/teacher/:id',
+adminUnwithdrawTeacherCtrl );
 
 // admin publishing exam results
-adminRouter.put('/publish/exam/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin exam results'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/publish/exam/:id',
+adminPublishResultsCtrl );
 
 // admin unpublishing exam results
-adminRouter.put('/unpublish/exam/:id', (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'admin unpublishing exam results'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-});
+adminRouter.put('/unpublish/exam/:id',
+adminUnPublishResultsCtrl );
 
 
 module.exports = adminRouter;
