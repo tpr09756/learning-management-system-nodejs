@@ -6,7 +6,7 @@ const isLogin = require('../../middleware/isLogin');
 const {registerAdminCtrl,
   loginAdminCtrl,
   getAdminsCtrl,
-  getSingleAdminCtrl,
+  getAdminProfileCtrl,
   updateAdminCtrl,
   deleteAdminCtrl,
   adminSuspendTeacherCtrl,
@@ -26,8 +26,8 @@ adminRouter.post('/login', loginAdminCtrl);
 adminRouter.get('/', getAdminsCtrl);
 
 // get single admin
-adminRouter.get('/:id', isLogin,
-getSingleAdminCtrl );
+adminRouter.get('/profile', isLogin,
+getAdminProfileCtrl);
 
 // update admin
 adminRouter.put('/:id',
