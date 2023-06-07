@@ -51,24 +51,21 @@ const loginAdminCtrl = AsyncHandler(async (req, res) => {
 //@desc Get all admins
 //@route GET /api/v1/admins
 //@access Private
-const getAdminsCtrl = (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'All admins'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
-    })
-  }
-}
+const getAdminsCtrl = AsyncHandler( async (req,res) => {
+  const admins = await Admin.find()
+  
+  res.status(200).json({
+    status:'success',
+    data: admins,
+    message: 'Admins fetched successfully'
+  })
+});
 
 //@desc Get single admin
 //@route GET /api/v1/admins/:id
 //@access Private
 const getAdminProfileCtrl = AsyncHandler(async (req,res) => {
+  console.log(req.user);
   const admin = await Admin.findById(req.user._id).select('-password -createdAt -updatedAt');
   if(!admin) {
     throw new Error('Admin not found');
@@ -84,19 +81,26 @@ const getAdminProfileCtrl = AsyncHandler(async (req,res) => {
 //@desc Update admin
 //@route UPDATE /api/v1/admins/:id
 //@access Private
-const updateAdminCtrl = (req,res) => {
-  try {
-    res.status(201).json({
-      status: 'success',
-      data: 'update admin'
-    })
-  } catch (error) {
-    res.json({
-       status : 'failed',
-       error: error.message
+const updateAdminCtrl = AsyncHandler( async (req,res) => {
+  const { name, email, password } = req.body;
+  
+  // if email exists
+  const emailExists = await Admin.findOne({email});
+  if(emailExists){
+    throw new Error('this email already exists');
+  } else {
+    //update admin
+    const updatedAdmin = await Admin.findByIdAndUpdate(req.userAuth._id, {
+      name, email, password,
+    }, { new: true, runValidators: true });
+    res.status(200).json({
+      status:'success',
+      data: updatedAdmin,
+      message: 'Admin updated successfully'
     })
   }
-}
+
+});
 
 //@desc Delete admin
 //@route DELETE /api/v1/admins/:id

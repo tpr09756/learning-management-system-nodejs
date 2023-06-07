@@ -4,8 +4,13 @@ const verifyToken = require('../utils/verifyToken');
 const isLogin = async (req, res, next) => {
  // Get Token from header
  const headerObj = req.headers;
+ 
+ /* const token = headerObj && headerObj.authorization && headerObj.authorization.split(' ')[1]; */ 
+
+// Using Optional Chaining
+const token = headerObj?.authorization?.split(' ')[1];
+ 
  // Verify token
- const token = headerObj.authorization.split(' ')[1];
  const verifiedToken = verifyToken(token);
   if(verifiedToken) {
     //Find Adminuser
