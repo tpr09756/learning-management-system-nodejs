@@ -6,7 +6,7 @@ const {
   notFoundError,
 } = require("../middleware/globalErrorHandler");
 const adminRouter = require("../routes/staff/admin.route");
-const academicYearRouter = require("../routes/staff/academicYear.route");
+const academicYearRouter = require("../routes/academics/academicYear.route");
 
 const app = express();
 
