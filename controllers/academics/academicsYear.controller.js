@@ -15,12 +15,19 @@ exports.createAcademicYear = AsyncHandler(async (req, res) => {
   if (academicYear) {
     throw new Error("Academic year already exists");
   }
+  // create academic year
+
   const academicYearCreated = await AcademicYear.create({
     name,
     fromYear,
     toYear,
     createdBy: req.userAuth._id,
   });
+
+  // Associate academic year to admin
+  const admin = await Admin.findById(req.userAuth._id);
+  admin.academicYears.push(academicYearCreated._id);
+  await admin.save();
 
   res.status(201).json({
     status: "success",

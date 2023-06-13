@@ -3,8 +3,7 @@ const bcrypt = require("bcryptjs");
 const Admin = require("../../model/Staff/Admin");
 const generateToken = require("../../utils/generateToken");
 const verifyToken = require("../../utils/verifyToken");
-const {hashPassword, isPassMatched} = require("../../utils/helpers");
-
+const { hashPassword, isPassMatched } = require("../../utils/helpers");
 
 //@desc Register admin
 //@route POST /api/admins/register
@@ -75,9 +74,9 @@ const getAdminsCtrl = AsyncHandler(async (req, res) => {
 //@access Private
 const getAdminProfileCtrl = AsyncHandler(async (req, res) => {
   console.log(req.user);
-  const admin = await Admin.findById(req.user._id).select(
-    "-password -createdAt -updatedAt"
-  );
+  const admin = await Admin.findById(req.userAuth._id)
+    .select("-password -createdAt -updatedAt")
+    .populate("academicYears");
   if (!admin) {
     throw new Error("Admin not found");
   } else {
