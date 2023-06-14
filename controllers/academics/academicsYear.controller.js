@@ -53,12 +53,12 @@ exports.getAcademicYears = AsyncHandler(async (req, res) => {
 //@route GET /api/v1/academic-years/:id
 //@access Private
 exports.getAcademicYear = AsyncHandler(async (req, res) => {
-  const academicYears = await AcademicYear.findById(req.params.id);
+  const academicYear = await AcademicYear.findById(req.params.id);
 
   res.status(201).json({
     status: "success",
     message: "Academic year fetched successfully",
-    data: academicYears,
+    data: academicYear,
   });
 });
 
