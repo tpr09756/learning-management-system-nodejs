@@ -8,6 +8,7 @@ const {
 const adminRouter = require("../routes/staff/admin.route");
 const academicYearRouter = require("../routes/academics/academicYear.route");
 const academicTermRouter = require("../routes/academics/academicTerm.route");
+const classLevelRouter = require("../routes/academics/classLevel.route");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/admins", adminRouter);
 app.use("/api/v1/academic-years", academicYearRouter);
 app.use("/api/v1/academic-terms", academicTermRouter);
+app.use("/api/v1/class-levels", classLevelRouter);
 
 //Error middleware
 app.use(notFoundError);
