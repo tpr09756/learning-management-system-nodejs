@@ -23,38 +23,43 @@ const adminSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "AcademicTerm",
-      }
+      },
     ],
-    academicYears:[ 
+    academicYears: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "AcademicYear",
-      }
+      },
     ],
     classLevels: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "ClassLevel",
-      }
+      },
+    ],
+    programs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Program",
+      },
     ],
     teachers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Teacher",
-      }
+      },
     ],
     students: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Student",
-      }
+      },
     ],
   },
   {
     timestamps: true,
   }
 );
-
 
 //model
 const Admin = mongoose.model("Admin", adminSchema);

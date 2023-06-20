@@ -25,7 +25,7 @@ exports.createClassLevel = AsyncHandler(async (req, res) => {
 
   // Associate class to admin
   const admin = await Admin.findById(req.userAuth._id);
-  admin.classLevels.push(academicTermCreated._id);
+  admin.classLevels.push(classCreated._id);
   await admin.save();
 
   res.status(201).json({
